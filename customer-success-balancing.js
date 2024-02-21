@@ -254,14 +254,10 @@ test("Scenario 12, it should throw error when customer have invalid quantity by 
   );
 });
 
-test.skip("Scenario 13, skipped by latency to execute this much of itens, it should throw error when customer have invalid quantity by higher than 999999", () => {
+test("Scenario 13, it should throw error when customer have invalid quantity by higher than 999999", () => {
   let customers = [];
-
-  // nunca se usa FOR EM TESTE, aqui apenas para demostrar entendimento que teste precisa cobrir regra de negócio
-  for (let i = 0; i < 100; i++) {
-    customers = [...customers, ...mapEntities(arraySeq(i * 1000, 1))];
-  }
-
+  customers.length = 1000000;
+  
   expect(() => validateCustomers(customers)).toThrowError(
     "customer is not between 1 and 999999"
   );
